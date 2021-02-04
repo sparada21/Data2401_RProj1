@@ -2,7 +2,11 @@
 title: "R Project 1 - Hello R"
 author: "Salvador Parada"
 date: "Due Fed 3rd"
-output: html_document
+output: 
+  html_document: 
+    fig_width: 5
+    highlight: espresso
+    theme: cerulean
 ---
 
 MAKE SURE YOU READ AND FOLLOW **ALL** INSTRUCTIONS ON THE INSTRUCTION DOCUMENT. 
@@ -17,17 +21,13 @@ library(datasauRus)
 
 ### Exercise 1
 
-(Type your answer to Exercise 1 here. This exercise does not require any R code. 
-
 datasaurus_dozen file:  
 
 How many rows? 1846  
-How many columns? 3  
-Variables included for the data frame? x,y  
+How many columns? not found "help" data  
+Variables included for the data frame? dataset, x, y  
 
 ### Exercise 2
-
-(The answers for this Exercise are given for you below. But you should clean up some of the narrative so that it only includes what you want to turn in.)
 
 First let's plot the data in the dino dataset:
 
@@ -76,7 +76,8 @@ ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
   geom_point()
 
 ```
-Correlation between 'x' and 'y' for star dataset:
+
+Correlation between 'x' and 'y' for circle dataset:  
 
 ```{r cor-circle}
 circle_data %>%
@@ -86,4 +87,40 @@ circle_data %>%
 
 ### Exercise 5
 
-(Add code and narrative as needed. To add R chunks either type out the backticks, curly braces, and the letter `r` or use the Insert chunk button above, with the green +C.)
+Plot all datasets:  
+
+```{r}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
+geom_point()+
+facet_wrap(~ dataset, ncol = 3) + # facet the dataset variable, in 3 cols
+theme(legend.position = "none")
+
+```
+
+Generate summary correlation coefficients:  
+
+```{r}
+datasaurus_dozen %>%
+group_by(dataset) %>%
+summarize(r = cor(x, y)) %>%
+print(13)
+## `summarise()` ungrouping output (override with `.groups` argument)
+## # A tibble: 13 x 2
+##   dataset          r
+##   <chr>        <dbl>
+## 1 away       -0.0641
+## 2 bullseye   -0.0686
+## 3 circle     -0.0683
+## 4 dino       -0.0645
+## 5 dots       -0.0603
+## 6 h_lines    -0.0617
+## 7 high_lines -0.0685
+## 8 slant_down -0.0690
+## 9 slant_up   -0.0686
+## 10 star      -0.0630
+## 11 v_lines   -0.0694
+## 12 wide_lines-0.0666
+## 13 x_shape   -0.0656
+
+```
+
