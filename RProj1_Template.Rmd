@@ -17,7 +17,13 @@ library(datasauRus)
 
 ### Exercise 1
 
-(Type your answer to Exercise 1 here. This exercise does not require any R code. **Remove notes like this in the final product that you turn in**)
+(Type your answer to Exercise 1 here. This exercise does not require any R code. 
+
+datasaurus_dozen file:  
+
+How many rows? 1846  
+How many columns? 3  
+Variables included for the data frame? x,y  
 
 ### Exercise 2
 
